@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "D:\Selenium\microsoft_rewards.py", 0, True
