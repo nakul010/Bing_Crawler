@@ -26,14 +26,14 @@ def test_connection():
 toast = ToastNotifier()
 # toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
-os.chdir("D:\Selenium")
+os.chdir("D:\Bing_Crawler")
 fake = Faker()
 test = test_connection()
 
 if test:
 
     # driver = webdriver.Chrome(executable_path = "D:\\Browser drivers\\chromedriver_win32\\chromedriver.exe")
-    driver = webdriver.Edge(executable_path="D:\\Browser drivers\\edgedriver_win64\\msedgedriver.exe")
+    driver = webdriver.Edge(executable_path=".\\Browser drivers\\edgedriver_win64\\msedgedriver.exe")
     # class DemoFindElementByID():
     #     def locate_by_id_demo(self):
     # driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install())
