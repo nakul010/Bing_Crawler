@@ -5,15 +5,15 @@ Created on Fri Dec 30 17:24:31 2022
 @author: Nakul
 """
 import os
-import shutil
+# import shutil
 import time
 import socket
-import pywintypes
+# import pywintypes
 from win10toast import ToastNotifier
 from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
+# from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from faker import Faker
 
@@ -26,34 +26,41 @@ def test_connection():
 toast = ToastNotifier()
 # toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
-os.chdir("D:\Bing_Crawler")
+os.chdir("D:/Bing_Crawler")
 fake = Faker()
 test = test_connection()
 
 if test:
 
     # driver = webdriver.Chrome(executable_path = "D:\\Browser drivers\\chromedriver_win32\\chromedriver.exe")
-    driver = webdriver.Edge(executable_path=".\\Browser drivers\\edgedriver_win64\\msedgedriver.exe")
-    # class DemoFindElementByID():
-    #     def locate_by_id_demo(self):
-    # driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install())
+    # driver = webdriver.Edge(executable_path=".\\Browser drivers\\edgedriver_win64\\msedgedriver.exe")
+
+    driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install())
     driver.maximize_window()
     # action = ActionChains(driver)
     # time.sleep(4)
     driver.get("https://rewards.bing.com/pointsbreakdown")
     # print(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text)
     # print(type(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text))
-    time.sleep(5)
-    n = 30
-    if driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text == "90" and driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[3]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b') == "12":
+    time.sleep(3)
+    
+    points = 0
+    
+    pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
+    microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[3]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
+    print(type(pc_search), type(microsoft_edge_bonus))
+    if pc_search == "90" and microsoft_edge_bonus == "12":
         driver.close()
     else:
-        print(n)
-        n = ((90-int(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text))//3) +12
-    print(n)
+        points = ((102-(int(pc_search)+int(microsoft_edge_bonus)))//3)
+    
+    print(points)
+    
     driver.get("https://www.bing.com/search?q=h&form=QBLH&sp=-1&pq=h&sc=10-1&qs=n&sk=&cvid=3E4543E2BC3B46C480C19004BB7B0D59&ghsh=0&ghacc=0&ghpl=")
+    
     time.sleep(3)
-    for i in range(n):
+    
+    for i in range(points):
         print(i+1)
         searchbox = driver.find_element(By.ID, "sb_form_q")
         searchicon = driver.find_element(By.XPATH, "//input[@id='sb_form_go']")
@@ -63,14 +70,14 @@ if test:
         searchbox.send_keys(Keys.BACKSPACE)
         searchbox.send_keys(fake.name())
         searchicon.click()
-        time.sleep(2)
+        time.sleep(1)
         # searchbox.send_keys(Keys.ENTER)
         # searchbox.clear()
-        time.sleep(3)
-        driver.refresh()
         time.sleep(1)
         driver.refresh()
-        time.sleep(3)
+        # time.sleep(1)
+        # driver.refresh()
+        time.sleep(2)
 
     # ActionChains(driver).send_keys(Keys.CONTROL, Keys.SHIFT, Keys.DELETE).perform()
     # driver.get("edge://settings/clearBrowserData")
@@ -104,7 +111,7 @@ if test:
     # else:
     #     driver.close()
 
-    time.sleep(5)
+    # time.sleep(5)
 else:
     exit()
     # print("No Internet")
