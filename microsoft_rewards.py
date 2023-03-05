@@ -48,11 +48,12 @@ if test:
     
     pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
     microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[3]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
-    print(type(pc_search), type(microsoft_edge_bonus))
+    print(pc_search, microsoft_edge_bonus)
+    
     if pc_search == "90" and microsoft_edge_bonus == "12":
         driver.close()
     else:
-        points = ((102-(int(pc_search)+int(microsoft_edge_bonus)))//3)
+        points = (102-((int(pc_search))+(int(microsoft_edge_bonus))))//3
     
     print(points)
     
