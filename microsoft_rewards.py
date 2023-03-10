@@ -26,7 +26,7 @@ def test_connection():
 toast = ToastNotifier()
 # toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
-os.chdir("D:/Bing_Crawler")
+# os.chdir("D:/Bing_Crawler")
 fake = Faker()
 test = test_connection()
 
