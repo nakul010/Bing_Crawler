@@ -45,7 +45,11 @@ if test:
     time.sleep(3)
     
     points = 0
-    if driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[1]/h2').text == "Lock in your Level 2 status":
+
+    total_pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]').text
+    # print(total_pc_search[-2:])
+
+    if total_pc_search[-2:] == 30:
         # points = 
         pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
         microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[2]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
