@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec 30 17:24:31 2022
+############## Bing crawler ##############
 
-@author: Nakul
-"""
 import os
 # import shutil
 import time
@@ -32,7 +28,7 @@ test = test_connection()
 
 if test:
 
-    # driver = webdriver.Chrome(executable_path = "D:\\Browser drivers\\chromedriver_win32\\chromedriver.exe")
+    # driver = webdriver.Chrome(executable_path = ".\\Browser drivers\\chromedriver_win32\\chromedriver.exe")
     # driver = webdriver.Edge(executable_path=".\\Browser drivers\\edgedriver_win64\\msedgedriver.exe")
 
     driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install())
