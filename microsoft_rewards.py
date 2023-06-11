@@ -1,6 +1,7 @@
-############## Bing crawler ##############
+    ############## Bing crawler ##############
 
-import os
+# import os
+import sys
 # import shutil
 import time
 import socket
@@ -22,31 +23,48 @@ def test_connection():
 toast = ToastNotifier()
 # toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
+def search():
+    searchbox = driver.find_element(By.ID, "sb_form_q")
+    searchicon = driver.find_element(By.XPATH, "//input[@id='sb_form_go']")
+    time.sleep(1)
+    searchbox.click()
+    searchbox.send_keys(Keys.CONTROL + "a")
+    searchbox.send_keys(Keys.BACKSPACE)
+    searchbox.send_keys(fake.name())
+    searchicon.click()
+    # time.sleep(1)
+    # searchbox.send_keys(Keys.ENTER)
+    # searchbox.clear()
+    # time.sleep(1)
+    # driver.refresh()
+    # time.sleep(1)
+    # driver.refresh()
+    time.sleep(2)
+
 # os.chdir("D:/Bing_Crawler")
 fake = Faker()
 test = test_connection()
 
 if test:
 
-    # driver = webdriver.Chrome(executable_path = ".\Browser drivers\chromedriver_win32\chromedriver.exe")
-    # driver = webdriver.Edge(executable_path="\Browser drivers\edgedriver_arm64\msedgedriver.exe")
+    # driver = webdriver.Chrome(executable_path = ".\Browser drivers\chromedriver_win32\chromedriver.exe") # chrome driver
+    # driver = webdriver.Edge(executable_path="\Browser drivers\edgedriver_arm64\msedgedriver.exe") # microsoft egde driver
 
-    driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install())
+    driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install()) # microsoft egde driver
     driver.maximize_window()
     # action = ActionChains(driver)
     # time.sleep(4)
     driver.get("https://rewards.bing.com/pointsbreakdown")
     # print(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text)
     # print(type(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text))
-    time.sleep(3)
+    # time.sleep(3)
     
     points = 0
 
     total_pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]').text
-    print(type(total_pc_search[-2:]))
+    # print(type(total_pc_search[-2:]))
 
     if total_pc_search[-2:] == "30":
-        # points = 
         pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
         microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[2]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
         print(pc_search, microsoft_edge_bonus)
@@ -69,28 +87,15 @@ if test:
     
     print(points)
     
+    # if points == 0
     driver.get("https://www.bing.com/search?q=h&form=QBLH&sp=-1&pq=h&sc=10-1&qs=n&sk=&cvid=3E4543E2BC3B46C480C19004BB7B0D59&ghsh=0&ghacc=0&ghpl=")
     
-    time.sleep(3)
+    time.sleep(1)
+    print(microsoft_edge_bonus)
     
     for i in range(points):
         print(i+1)
-        searchbox = driver.find_element(By.ID, "sb_form_q")
-        searchicon = driver.find_element(By.XPATH, "//input[@id='sb_form_go']")
-        time.sleep(1)
-        searchbox.click()
-        searchbox.send_keys(Keys.CONTROL + "a")
-        searchbox.send_keys(Keys.BACKSPACE)
-        searchbox.send_keys(fake.name())
-        searchicon.click()
-        time.sleep(1)
-        # searchbox.send_keys(Keys.ENTER)
-        # searchbox.clear()
-        time.sleep(1)
-        driver.refresh()
-        # time.sleep(1)
-        # driver.refresh()
-        time.sleep(2)
+        search()
 
     # ActionChains(driver).send_keys(Keys.CONTROL, Keys.SHIFT, Keys.DELETE).perform()
     # driver.get("edge://settings/clearBrowserData")
@@ -126,6 +131,6 @@ if test:
 
     # time.sleep(5)
 else:
-    exit()
-    # print("No Internet")
+    sys.exit()
+    print("No Internet")
     
