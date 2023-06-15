@@ -1,6 +1,4 @@
-    ############## Bing crawler ##############
-
-# import os
+import os
 import sys
 # import shutil
 import time
@@ -41,6 +39,40 @@ def search():
     # driver.refresh()
     time.sleep(2)
 
+def check_points():
+    points = 0
+
+    total_pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]').text
+    # print(type(total_pc_search[-2:]))
+
+    if total_pc_search[-2:] == "30":
+        pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
+        microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[2]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
+        # print(pc_search, microsoft_edge_bonus)
+
+        if pc_search == "30" and microsoft_edge_bonus == "3":
+            driver.quit()
+            sys.exit()
+        else:
+            points = (33-((int(pc_search))+(int(microsoft_edge_bonus))))//3
+
+    else:
+        # print(driver.find_element(By.CSS_SELECTOR, "mee-rewards-counter-animation[from='$ctrl.previousPointsToNextLevel'] span[mee-element-ready='$ctrl.loadCounterAnimation()']"))
+        pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
+        microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[2]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
+        # print(pc_search, microsoft_edge_bonus)
+        
+        if pc_search == "90" and microsoft_edge_bonus == "12":
+            driver.quit()
+            sys.exit()
+        else:
+            points = (102-((int(pc_search))+(int(microsoft_edge_bonus))))//3
+    
+    # if points == 0
+    driver.get("https://www.bing.com/search?q=h&form=QBLH&sp=-1&pq=h&sc=10-1&qs=n&sk=&cvid=3E4543E2BC3B46C480C19004BB7B0D59&ghsh=0&ghacc=0&ghpl=")
+
+    return points, microsoft_edge_bonus, pc_search, microsoft_edge_bonus
+
 # os.chdir("D:/Bing_Crawler")
 fake = Faker()
 test = test_connection()
@@ -59,44 +91,12 @@ if test:
     # print(type(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text))
     # time.sleep(3)
     
-    points = 0
-
-    total_pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]').text
-    # print(type(total_pc_search[-2:]))
-
-    if total_pc_search[-2:] == "30":
-        pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
-        microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[2]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
-        print(pc_search, microsoft_edge_bonus)
-
-        if pc_search == "30" and microsoft_edge_bonus == "3":
-            driver.close()
-        else:
-            points = (33-((int(pc_search))+(int(microsoft_edge_bonus))))//3
-
-    else:
-        # print(driver.find_element(By.CSS_SELECTOR, "mee-rewards-counter-animation[from='$ctrl.previousPointsToNextLevel'] span[mee-element-ready='$ctrl.loadCounterAnimation()']"))
-        pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
-        microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[2]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
-        print(pc_search, microsoft_edge_bonus)
-        
-        if pc_search == "90" and microsoft_edge_bonus == "12":
-            driver.close()
-        else:
-            points = (102-((int(pc_search))+(int(microsoft_edge_bonus))))//3
-    
-    print(points)
-    
-    # if points == 0
-    driver.get("https://www.bing.com/search?q=h&form=QBLH&sp=-1&pq=h&sc=10-1&qs=n&sk=&cvid=3E4543E2BC3B46C480C19004BB7B0D59&ghsh=0&ghacc=0&ghpl=")
-    
-    time.sleep(1)
-    print(microsoft_edge_bonus)
+    points, microsoft_edge_bonus, pc_search, microsoft_edge_bonus = check_points()
     
     for i in range(points):
         print(i+1)
         search()
-
+    
     # ActionChains(driver).send_keys(Keys.CONTROL, Keys.SHIFT, Keys.DELETE).perform()
     # driver.get("edge://settings/clearBrowserData")
     # time.sleep(5)
@@ -131,6 +131,6 @@ if test:
 
     # time.sleep(5)
 else:
-    sys.exit()
+    os.exit()
     print("No Internet")
     
