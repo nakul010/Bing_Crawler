@@ -59,8 +59,8 @@ def check_points():
     else:
         # print(driver.find_element(By.CSS_SELECTOR, "mee-rewards-counter-animation[from='$ctrl.previousPointsToNextLevel'] span[mee-element-ready='$ctrl.loadCounterAnimation()']"))
         pc_search = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
-        microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[2]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
-        # print(pc_search, microsoft_edge_bonus)
+        microsoft_edge_bonus = driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[3]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text
+        # print(pc_search, microsoft_edge_bonus)//*[@id="userPointsBreakdown"]/div/div[2]/div/div[3]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b
         
         if pc_search == "90" and microsoft_edge_bonus == "12":
             driver.quit()
@@ -80,19 +80,23 @@ test = test_connection()
 if test:
 
     # driver = webdriver.Chrome(executable_path = ".\Browser drivers\chromedriver_win32\chromedriver.exe") # chrome driver
-    # driver = webdriver.Edge(executable_path="\Browser drivers\edgedriver_arm64\msedgedriver.exe") # microsoft egde driver
+    driver = webdriver.Edge(executable_path="\Browser drivers\edgedriver_arm64\msedgedriver.exe") # microsoft egde driver
 
-    driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install()) # microsoft egde driver
+    # driver = webdriver.Edge() # microsoft egde driver
     driver.maximize_window()
     # action = ActionChains(driver)
     # time.sleep(4)
-    driver.get("https://rewards.bing.com/pointsbreakdown")
+    try:
+        driver.get("https://rewards.bing.com/pointsbreakdown")
+    except:
+        sys.exit()
     # print(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text)
     # print(type(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text))
     # time.sleep(3)
     
     points, microsoft_edge_bonus, pc_search, microsoft_edge_bonus = check_points()
-    
+    print(points, microsoft_edge_bonus, pc_search, microsoft_edge_bonus)
+    time.sleep(3)
     for i in range(points):
         print(i+1)
         search()
@@ -131,6 +135,6 @@ if test:
 
     # time.sleep(5)
 else:
-    os.exit()
+    sys.exit()
     print("No Internet")
     
