@@ -15,7 +15,5 @@ This is a automated script in python which crawls in Microsoft Bing browser and 
    ```text
    pip install -r requirements.txt
    ```
-
-3. Replace `<path of microsoft_rewards.py>` with the path of the `microsoft_rewards.py` file in python_runner.
-
-4. Now you are ready to run the script by just running python_runner.bat
+   
+3. Now you are ready to run the script by just running python_runner.bat
