@@ -1,5 +1,5 @@
 @echo off
 
-python D:\Selenium\microsoft_rewards.py
+python C:\Users\Nakul\Downloads\Bing_Crawler\microsoft_rewards.py
 
-@pause
+exit

@@ -18,8 +18,6 @@ def test_connection():
         return True
     except OSError:
         return False
-toast = ToastNotifier()
-# toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
 def search():
     searchbox = driver.find_element(By.ID, "sb_form_q")
@@ -76,6 +74,10 @@ def check_points():
 # os.chdir("D:/Bing_Crawler")
 fake = Faker()
 test = test_connection()
+
+# # Notification
+# toast = ToastNotifier()
+# toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
 if test:
 
@@ -135,6 +137,7 @@ if test:
 
     # time.sleep(5)
 else:
-    sys.exit()
     print("No Internet")
+    # toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
+    sys.exit()
     
