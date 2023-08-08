@@ -75,9 +75,9 @@ def check_points():
 fake = Faker()
 test = test_connection()
 
-# # Notification
-# toast = ToastNotifier()
-# toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
+# Notification
+toast = ToastNotifier()
+toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
 if test:
 
@@ -102,40 +102,7 @@ if test:
     for i in range(points):
         print(i+1)
         search()
-    
-    # ActionChains(driver).send_keys(Keys.CONTROL, Keys.SHIFT, Keys.DELETE).perform()
-    # driver.get("edge://settings/clearBrowserData")
-    # time.sleep(5)
-    # driver.find_element(By.XPATH, '//*[@id="clear-now"]').click()
-    # time.sleep(5)
-    # driver.get("edge://history/all")
-    # time.sleep(3)
 
-    # for i in range(15):
-    # findbyid = DemoFindElementByID()
-    # findbyid.locate_by_id_demo()
-
-
-    # driver = webdriver.Edge(executable_path=EdgeChromiumDriverManager().install())
-    # driver.get("https://www.bing.com/")
-    # seacrh = driver.find_element(By.ID, "sb_form_q")
-    # seacrh.send_keys("jj")
-    # time.sleep(10)
-    # for i in arr:
-    #     driver.get(i)
-    # print(driver.title)
-
-    # driver.get("https://rewards.bing.com/pointsbreakdown")
-    # # print(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text)
-    # # print(type(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text))
-    # time.sleep(5)
-
-    # if driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text == "90" and driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[3]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b') == "12":
-    #     driver.close()
-    # else:
-    #     driver.close()
-
-    # time.sleep(5)
 else:
     print("No Internet")
     # toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
