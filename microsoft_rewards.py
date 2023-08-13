@@ -77,7 +77,7 @@ test = test_connection()
 
 # Notification
 toast = ToastNotifier()
-toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
+# toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
 if test:
 
