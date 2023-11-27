@@ -8,9 +8,12 @@ from win10toast import ToastNotifier
 from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from faker import Faker
+import random
+
+delay = random.uniform(2, 10)
 
 def test_connection():
     try:
@@ -22,20 +25,16 @@ def test_connection():
 def search():
     searchbox = driver.find_element(By.ID, "sb_form_q")
     searchicon = driver.find_element(By.XPATH, "//input[@id='sb_form_go']")
-    time.sleep(1)
+    time.sleep(delay)
     searchbox.click()
     searchbox.send_keys(Keys.CONTROL + "a")
     searchbox.send_keys(Keys.BACKSPACE)
     searchbox.send_keys(fake.name())
     searchicon.click()
-    # time.sleep(1)
     # searchbox.send_keys(Keys.ENTER)
     # searchbox.clear()
-    # time.sleep(1)
     # driver.refresh()
-    # time.sleep(1)
-    # driver.refresh()
-    time.sleep(2)
+    time.sleep(delay)
 
 def check_points():
     points = 0
@@ -76,7 +75,7 @@ fake = Faker()
 test = test_connection()
 
 # Notification
-toast = ToastNotifier()
+# toast = ToastNotifier()
 # toast.show_toast("Rewards", "Microsoft Reward bot is going to run", duration=30)
 
 if test:
@@ -87,19 +86,21 @@ if test:
     # driver = webdriver.Edge() # microsoft egde driver
     driver.maximize_window()
     # action = ActionChains(driver)
-    # time.sleep(4)
+    # time.sleep(delay)
     try:
         driver.get("https://rewards.bing.com/pointsbreakdown")
     except:
         sys.exit()
     # print(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text)
     # print(type(driver.find_element(By.XPATH, '//*[@id="userPointsBreakdown"]/div/div[2]/div/div[1]/div/div[2]/mee-rewards-user-points-details/div/div/div/div/p[2]/b').text))
-    # time.sleep(3)
+    # time.sleep(delay)
     
     points, microsoft_edge_bonus, pc_search, microsoft_edge_bonus = check_points()
     print(points, microsoft_edge_bonus, pc_search, microsoft_edge_bonus)
-    time.sleep(3)
+    time.sleep(delay)
     for i in range(points):
+        element = driver.find_element(By.XPATH, '//*[@id="langChangeAnchor"]')
+        ActionChains(driver).move_to_element(element).perform()
         print(i+1)
         search()
 
